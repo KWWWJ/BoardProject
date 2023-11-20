@@ -1,7 +1,7 @@
 package com.java4.boardproject.board.domain;
 
-import java.security.Timestamp;
-import java.sql.Date;
+
+import java.sql.Timestamp;
 
 import com.java4.boardproject.category.domain.Category;
 import com.java4.boardproject.user.domain.User;
@@ -16,18 +16,16 @@ import lombok.RequiredArgsConstructor;
 @AllArgsConstructor
 public class Board {
 	private int id;
-	private int veiws;
-	private int likes;
-	private int hates;
+	@NonNull
+	private int userId;
 	@NonNull
 	private String title;
 	@NonNull
 	private String content;
+	private int views = 0;
+//	private int likes = 0;
+//	private int hates = 0;
+	private boolean isWithdrew = false;
 	private Timestamp createdAt;
-	private User writer;
-	private boolean isWuthdrew = false;
-	private Category category;
-	@NonNull
-	private int usrtId;
 	
 }

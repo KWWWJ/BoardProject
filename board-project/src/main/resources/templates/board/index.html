@@ -1,0 +1,65 @@
+<html lang="ko" mxlns:th="http://www.thymeleaf.org">
+
+<head th:fragment="boardFragmentHead"></head>
+
+<head>
+  <meta charset="UTF-8">
+  <title>게시판</title>
+</head>
+
+<body>
+  <div th:fragment="boardFragment" class="board container">
+    <!-- <div>
+            <ul>
+                <li th:each="item:${list}" th:object="${item}">
+                    </h1><h1 th:text="*{title}"></h1>
+                    <p th:text="*{userId}"></p>
+                </li>
+            </ul>
+        </div> -->
+    <button onclick="location.href='/add'" class="btn btn-outline-primary">작성하기</button>
+    <button onclick="location.href='/regist'" class="btn btn-outline-secondary">회원 가입</button>
+    <button id="login-btn" onclick="location.href='/login'" class="btn btn-outline-success">로그인</button>
+    <form id="logout-form" action="/logout" method="post">
+      <button id="logout-btn" class="btn btn-outline-warning">로그아웃</button>
+    </form>
+    <table class="table">
+      <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">제목</th>
+          <th scope="col">작성자</th>
+          <th scope="col">작성일자</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr th:each="item:${list}" th:object="${item}">
+          <th scope="row" th:text="*{id}"></th>
+          <td th:text="*{title}"></td>
+          <td th:text="*{userId}"></td>
+          <td th:text="*{createdAt}"></td>
+        </tr>
+        <!-- <tr>
+                <th scope="row">2</th>
+                <td>Jacob</td>
+                <td>Thornton</td>
+                <td>@fat</td>
+              </tr>
+              <tr>
+                <th scope="row">3</th>
+                <td colspan="2">Larry the Bird</td>
+                <td>@twitter</td>
+              </tr>
+            </tbody> -->
+    </table>
+  </div>
+  <script>
+    if (sessionStorage.getItem("userId") != null) {
+      document.getElementById("logout-btn").style.display = "block";
+    } else {
+      document.getElementById("logout-btn").style.display = "none";
+    }
+  </script>
+</body>
+
+</html>
