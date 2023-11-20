@@ -1,0 +1,52 @@
+<html lang="ko" th:fragment="addFragmentHead">
+
+<head>
+    <meta charset="UTF-8">
+    <title>게시글 작성</title>
+</head>
+
+<body>
+    <div th:fragment="addFragment" class="add container">
+        <form id="add-form" action="/add" method="post">
+            <fieldset>
+                <div class="form-floating mb-3">
+                    <input type="text" name="title" class="form-control" id="floatingInput" placeholder="제목">
+                    <label for="floatingInput">title</label>
+                </div>
+                <div class="form-floating">
+                    <input type="text" name="content" class="form-control" id="floatingPassword" placeholder="내용">
+                    <label for="floatingPassword">content</label>
+                    <div class="form-floating mb-3"></div>
+                </div>
+
+                <!-- <legend>작성하기</legend>
+                <div>
+                    <label for="title">
+                        <input type="text" id="title" name="title" placeholder="제목">
+                    </label>
+                </div> -->
+                <!-- <div>
+                    <textarea name="content" id="content" cols="30" rows="10"></textarea>
+                </div> -->
+                <div>
+                    <button>업로드</button>
+                    <button id="cancel">뒤로가기</button>
+                </div>
+            </fieldset>
+        </form>
+    </div>
+    <script>
+        document.getElementById("add-form").onsubmit = (e) => {
+            if (!(e.target.title.value && e.target.content.value)) {
+                e.preventDefault();
+            }
+        }
+        document.getElementById("cancel").onclick = (e) => {
+            alert("is worked!");
+            e.preventDefault();
+            location.href = "/";
+        }
+    </script>
+</body>
+
+</html>

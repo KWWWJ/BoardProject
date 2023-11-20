@@ -1,0 +1,85 @@
+<html lang="ko" th:fragment="registFragmentHead">
+
+<head>
+    <meta charset="UTF-8">
+    <title>회원 가입</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.10.0/js/bootstrap-datepicker.min.js"
+        integrity="sha512-LsnSViqQyaXpD4mBBdRYeP6sRwJiJveh2ZIbW41EBrNmKxgr/LFZIiWT6yr+nycvhvauz8c2nYMhrP80YhG7Cw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+</head>
+
+<body>
+    <div th:fragment="registFragment" class="regist container">
+        <div>*은 필수 기입사항</div>
+        <form id="regist-form" action="/regist" method="post">
+            <fieldset>
+                <div class="form-floating mb-3">
+                    <input type="text" name="name" class="form-control" id="floatingInput" placeholder="제목">
+                    <label for="floatingInput">*Name</label>
+                </div>
+                <div class="form-floating">
+                    <input type="text" name="userId" class="form-control" id="floatingPassword" placeholder="내용">
+                    <label for="floatingPassword">*ID</label>
+                    <div class="form-floating mb-3"></div>
+                </div>
+                <div class="form-floating">
+                    <input type="text" name="password" class="form-control" id="floatingPassword" placeholder="내용">
+                    <label for="floatingPassword">*Password</label>
+                    <div class="form-floating mb-3"></div>
+                </div>
+                <div class="form-floating">
+                    <input type="text" name="phoneNumber" class="form-control" id="floatingPassword" placeholder="내용">
+                    <label for="floatingPassword">*PhoneNumber</label>
+                    <div class="form-floating mb-3"></div>
+                </div>
+                <div class="form-floating">
+                    <input type="text" name="address" class="form-control" id="floatingPassword" placeholder="내용">
+                    <label for="floatingPassword">Address</label>
+                    <div class="form-floating mb-3"></div>
+                </div>
+                <div class="form-floating">
+                    <input type="text" name="email" class="form-control" id="floatingPassword" placeholder="내용">
+                    <label for="floatingPassword">*Email</label>
+                    <div class="form-floating mb-3"></div>
+                </div>
+                <div class="form-floating">
+                    <input type="text" name="gitAddress" class="form-control" id="floatingPassword" placeholder="내용">
+                    <label for="floatingPassword">Git Address</label>
+                    <div class="form-floating mb-3"></div>
+                </div>
+                <div class="form-floating">
+                    <input type="text" name="date" class="form-control" id="bootstrap-datepicker" placeholder="내용">
+                    <label for="floatingPassword">Brith : yyyy-mm-dd</label>
+                    <div class="form-floating mb-3"></div>
+                </div>
+                <div>
+                    <div>Gender</div>
+                    <input type="radio" name="gender" value="1">
+                    <label for="floatingPassword">남성</label>
+                    <input type="radio" name="gender" value="0">
+                    <label for="floatingPassword">여성</label>
+                    <div class="form-floating mb-3"></div>
+                </div>
+                <div>
+                    <button>가입하기</button>
+                    <button id="cancel">뒤로가기</button>
+                </div>
+            </fieldset>
+        </form>
+    </div>
+
+    <script>
+        document.getElementById("regist-form").onsubmit = (e) => {
+            if (!(e.target.title.value && e.target.content.value)) {
+                e.preventDefault();
+            }
+        }
+        document.getElementById("cancel").onclick = (e) => {
+            alert("is worked!");
+            e.preventDefault();
+            location.href = "/";
+        }
+    </script>
+</body>
+
+</html>
