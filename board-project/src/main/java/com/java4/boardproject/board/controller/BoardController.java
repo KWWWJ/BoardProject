@@ -61,7 +61,9 @@ public class BoardController {
 	@PostMapping("/add")
 	public String boardAdd(@RequestParam Map<String, String> data, HttpSession session) {
 		
-		int userId = (Integer)session.getAttribute("userId");
+		System.out.println("session : "+session.getAttribute("id"));
+		
+		int userId = (Integer)session.getAttribute("id");
 
 		if(userId == 0) {
 			return "redirect:/";
