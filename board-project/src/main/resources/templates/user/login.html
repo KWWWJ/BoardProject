@@ -1,0 +1,32 @@
+<html lang="ko">
+
+<head th:fragment="loginFragmentHead">
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="/styles/user/login.css">
+    <title>로그인</title>
+</head>
+
+<body>
+    <div th:fragment="loginFragment" class="login container">
+        <form id="login-form" action="/login" method="post">
+            <fieldset>
+                <div class="form-floating">
+                    <input type="text" name="userId" class="form-control" placeholder="ID">
+                    <label>ID</label>
+                    <div class="form-floating mb-3"></div>
+                </div>
+                <div class="form-floating">
+                    <input type="password" name="password" class="form-control" placeholder="Password">
+                    <label>Password</label>
+                    <div class="form-floating mb-3"></div>
+                </div>
+                <div>
+                    <a type="button" id="login-btn" class="btn btn-primary">로그인</a>
+                    <button id="cancel" class="btn btn-outline-danger">뒤로가기</button>
+                </div>
+            </fieldset>
+        </form>
+
+</body>
+
+</html>

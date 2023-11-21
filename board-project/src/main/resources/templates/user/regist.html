@@ -1,0 +1,178 @@
+<html lang="ko">
+
+<head th:fragment="registFragmentHead">
+    <meta charset="UTF-8">
+    <title>회원 가입</title>
+    <link rel="stylesheet" href="/styles/user/regist.css">
+
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.10.0/css/bootstrap-datepicker.min.css"
+        integrity="sha512-34s5cpvaNG3BknEWSuOncX28vz97bRI59UnVtEEpFX536A7BtZSJHsDyFoCl8S7Dt2TPzcrCEoHBGeM4SUBDBw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.10.0/css/bootstrap-datepicker.standalone.min.css"
+        integrity="sha512-D5/oUZrMTZE/y4ldsD6UOeuPR4lwjLnfNMWkjC0pffPTCVlqzcHTNvkn3dhL7C0gYifHQJAIrRTASbMvLmpEug=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.10.0/css/bootstrap-datepicker3.min.css"
+        integrity="sha512-aQb0/doxDGrw/OC7drNaJQkIKFu6eSWnVMAwPN64p6sZKeJ4QCDYL42Rumw2ZtL8DB9f66q4CnLIUnAw28dEbg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.10.0/css/bootstrap-datepicker3.standalone.min.css"
+        integrity="sha512-t+00JqxGbnKSfg/4We7ulJjd3fGJWsleNNBSXRk9/3417ojFqSmkBfAJ/3+zpTFfGNZyKxPVGwWvaRuGdtpEEA=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <script src="https://code.jquery.com/jquery-3.2.1.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.10.0/js/bootstrap-datepicker.min.js"
+        integrity="sha512-LsnSViqQyaXpD4mBBdRYeP6sRwJiJveh2ZIbW41EBrNmKxgr/LFZIiWT6yr+nycvhvauz8c2nYMhrP80YhG7Cw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script
+        src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.10.0/locales/bootstrap-datepicker.ko.min.js"
+        integrity="sha512-L4qpL1ZotXZLLe8Oo0ZyHrj/SweV7CieswUODAAPN/tnqN3PA1P+4qPu5vIryNor6HQ5o22NujIcAZIfyVXwbQ=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+</head>
+
+<body>
+    <div th:fragment="registFragment" class="regist container">
+        <div>*은 필수 기입사항</div>
+        <form id="regist-form" action="/regist" method="post">
+            <fieldset>
+                <div class="input-group mb-4">
+                    <span class="input-group-text" id="user-name" aria-placeholder="Name" aria-label="name"
+                        aria-describedby="name">NAME</span>
+                    <input type="text" name="name" class="form-control" id="floatingInput"
+                        placeholder="*Name : 영문 4~20/한글 2~10자">
+                </div>
+                <div class="input-group mb-4">
+                    <span class="input-group-text" id="user-id" aria-placeholder="id" aria-label="id"
+                        aria-describedby="id">ID</span>
+                    <input type="text" name="userId" class="form-control" placeholder="*ID : 3~20자, 영어/숫자만 사용"
+                        minlength="3" maxlength="20" oninput="handleOnInput(this)">
+
+                </div>
+                <div class="input-group mb-4">
+                    <div id="password">조건을 만족하지 못합니다.</div>
+                    <span class="input-group-text" id="user-Password" aria-placeholder="Password" aria-label="Password"
+                        aria-describedby="Password">Password</span>
+                    <input type="password" id="color" name="password" class="form-control"
+                        placeholder="*Password  : 10~30자, 대소문자/숫자/특수문자 포함" minlength="10" maxlength="30"
+                        oninput="passwordCheck(this)">
+
+                </div>
+                <div class="input-group mb-4">
+                    <span class="input-group-text" id="user-phoneNumber" aria-placeholder="phoneNumber"
+                        aria-label="phoneNumber" aria-describedby="phoneNumber">Phone Number</span>
+                    <input type="text" name="phoneNumber" class="form-control" placeholder="*Phone Number"
+                        maxlength="13" oninput="phone(this)">
+
+
+                </div>
+                <div class="input-group mb-4">
+                    <span class="input-group-text" id="user-address" aria-placeholder="address" aria-label="address"
+                        aria-describedby="address">Address</span>
+                    <input type="text" name="address" class="form-control" placeholder="Address : 5~100자" minlength="5"
+                        maxlength="100">
+
+
+                </div>
+                <div class="input-group mb-4">
+                    <span class="input-group-text" id="user-email" aria-placeholder="email" aria-label="email"
+                        aria-describedby="email">E-mail</span>
+                    <input type="email" name="email" class="form-control" id="floatingEmail"
+                        placeholder="*example@gmail.com (com/org/co.kr/net만 사용)">
+
+
+                </div>
+                <div class="input-group mb-4">
+                    <span class="input-group-text" id="user-gitAddress" aria-placeholder="gitAddress"
+                        aria-label="gitAddress" aria-describedby="gitAddress">Git Address</span>
+                    <input type="text" name="gitAddress" class="form-control" value="https://github.com/">
+
+
+                </div>
+                <div class="input-group mb-4">
+                    <span class="input-group-text" id="user-birth">Birth</span>
+                    <input type="text" name="date" class="form-control" id="datePicker" autocomplete="off"
+                        placeholder="yyyy-mm-dd">
+                </div>
+                <div>
+                    <div>Gender</div>
+                    <input type="radio" name="gender" value="1">
+                    <label>남성</label>
+                    <input type="radio" name="gender" value="2">
+                    <label>여성</label>
+                    <input type="radio" name="gender" value="0" checked="checked">
+                    <label>선택 안함</label>
+                </div>
+                <div>
+                    <button id="regist-btn" class="btn btn-outline-success">가입하기</button>
+                    <button id="cancel" class="btn btn-outline-danger">뒤로가기</button>
+                </div>
+            </fieldset>
+        </form>
+        <script>
+            const pattern1 = /[0-9]/;
+            const pattern2 = /[a-z]/;
+            const pattern3 = /[A-Z]/;
+            const pattern4 = /[~!@#$%^&*]/;
+            const pwMessage = "";
+
+            function handleOnInput(e) {
+                e.value = e.value.replace(/[^0-9a-zA-Z]/ig, '');
+            }
+
+            function phone(e) {
+                e.value = e.value
+                    .replace(/[^0-9]/g, '')
+                    .replace(/(^02.{0}|^01.{1}|[0-9]{3,4})([0-9]{3,4})([0-9]{4})/g, "$1-$2-$3");
+                console.log("work2");
+            }
+
+            function passwordCheck(e) {
+                console.log("input : " + e.value.length + "|" + e.value);
+
+                if (pattern1.test(e.value) && pattern2.test(e.value) && pattern3.test(e.value) && pattern4.test(e.value) && e.value.length >= 10 && e.value.length <= 30) {
+                    document.getElementById("password").innerHTML = "조건을 만족했습니다."
+                    document.getElementById("password").style.color = "green"
+                    console.log("success : " + "|" + pattern1.test(e.value) + "|" + pattern2.test(e.value) + "|" + pattern3.test(e.value) + "|" + pattern4.test(e.value));
+                } else {
+                    document.getElementById("password").style.display = "block";
+                    console.log("resean : " + "|" + pattern1.test(e.value) + "|" + pattern2.test(e.value) + "|" + pattern3.test(e.value) + "|" + pattern4.test(e.value));
+                    document.getElementById("regist-btn").addEventListener("submit", (event) => {
+                        event.preventDefault();
+                        alert("정보를 올바르게 작성해주세요.")
+                    })
+
+                }
+            }
+
+            // const regex = new RegExp('[a-z0-9]+@[a-z]+\.[com, org, ko.kr, net]]');
+
+            // function email(e) {
+            //     e.value = e.regex;
+            // }
+
+            // function gitAddress(e) {
+
+            //     if (e.startsWith('https://github.com/')) {
+            //         return e;
+            //     } else {
+            //         e = "https://github.com/" + e;
+            //     }
+            //     return e;
+            // }
+
+            // $('#datePicker').datepicker({
+            //     format: "yyyy-mm-dd",
+            //     // startDate: "-1d",
+            //     endDate: "1d",
+            //     autoclose: true,
+            //     clearBtn: true,
+            //     title: "Birth",
+            //     language: "ko",
+            // });
+
+        </script>
+    </div>
+</body>
+
+</html>

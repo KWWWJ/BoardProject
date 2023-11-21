@@ -9,19 +9,6 @@
 
 <body>
   <div th:fragment="boardFragment" class="board container">
-    <!-- <div>
-            <ul>
-                <li th:each="item:${list}" th:object="${item}">
-                    </h1><h1 th:text="*{title}"></h1>
-                    <p th:text="*{userId}"></p>
-                </li>
-            </ul>
-        </div> -->
-    <button onclick="location.href='/add'" class="btn btn-outline-primary">작성하기</button>
-    <button onclick="location.href='/regist'" class="btn btn-outline-secondary">회원 가입</button>
-    <button id="login-btn" onclick="location.href='/login'" class="btn btn-outline-success">로그인</button>
-    <form id="logout-form" action="/logout" method="post">
-      <button id="logout-btn" class="btn btn-outline-warning">로그아웃</button>
     </form>
     <table class="table">
       <thead>
@@ -53,12 +40,33 @@
             </tbody> -->
     </table>
   </div>
+  <div id="isLogin" th:text="${isLogin}"></div>
+  <div id="modal">
+    <div class="modal-content">
+      <h2>로그인 실패</h2>
+      <p>아이디 혹은 비밀번호가 잘못되었습니다.</p>
+      <button id="close-modal">닫기</button>
+    </div>
+  </div>
   <script>
-    if (sessionStorage.getItem("userId") != null) {
-      document.getElementById("logout-btn").style.display = "block";
-    } else {
-      document.getElementById("logout-btn").style.display = "none";
+    const loginBox = document.getElementById("isLogin");
+    const modal = document.getElementById("modal");
+    const openModalBtn = document.getElementById("open-modal");
+    const closeModalBtn = document.getElementById("close-modal");
+
+    console.log(loginBox.innerHTML);
+
+    function isLogin() {
+      if (loginBox.innerHTML == 0) {
+        modal.style.display = "block";
+        document.body.style.overflow = "hidden"
+      }
+      closeModalBtn.addEventListener('click', function () {
+        modal.style.display = "none";
+        document.body.style.overflow = "auto";
+      })
     }
+    isLogin();
   </script>
 </body>
 

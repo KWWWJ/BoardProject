@@ -29,7 +29,7 @@ public class UserDAO {
 					rs.getString("address"),
 					rs.getString("email"),
 					rs.getString("git_address"),
-					rs.getInt("gender") == 1,
+					rs.getInt("gender"),
 					rs.getDate("birth"),
 					rs.getTimestamp("created_at")
 					);
@@ -38,8 +38,7 @@ public class UserDAO {
 	
 	public void add(User user) {
 		int gender = 0;
-		System.out.println("isGender : " + user.isGender());
-		if(user.isGender() == true) {
+		if(user.getGender() == 1) {
 			gender = 1;
 		}
 		jdbcTemplate.update(
@@ -68,6 +67,13 @@ public class UserDAO {
 		return jdbcTemplate.queryForObject(
 				"select * from users where \"id\"=?", 
 				mapper, id
+			);
+	}
+	
+	public User get(String userId) {
+		return jdbcTemplate.queryForObject(
+				"select * from users where \"user_id\"=?", 
+				mapper, userId
 			);
 	}
 	

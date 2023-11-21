@@ -25,14 +25,35 @@ public class BoardController {
 	UserService userService;
 	
 	@GetMapping("/")
-	public String boardMainPage(Model model) {
+	public String boardMainPage(Model model, HttpSession session) {
+		if(session.getAttribute("userName") == null) {
+			model.addAttribute("headLink", "basic/header");
+			model.addAttribute("headerHead", "headerFragment");
+			model.addAttribute("headerHead", "headerFragmentHead");
+		}
+		else {
+			String userName = (String)session.getAttribute("userName");
+			model.addAttribute("headLink", "user/login-box");
+			model.addAttribute("headerHead", "loginBoxFragment");
+			model.addAttribute("headerHead", "loginBoxFragmentHead");
+			model.addAttribute("userName", userName);
+		}
 		model.addAttribute("title", "게시판");
 		model.addAttribute("path", "/board/index");
 		model.addAttribute("content", "boardFragment");
 		model.addAttribute("contentHead", "boardFragmentHead");
 		model.addAttribute("list", boardService.getAll());
-		model.addAttribute("idList", userService.getAll());
+		if(model.getAttribute("login") == null) {
+			model.addAttribute("isLogin", 2);
+			System.out.println(model.getAttribute("login"));
+		}else {
+			model.addAttribute("isLogin", (Integer)model.getAttribute("login"));
+			System.out.println("login number : "+(Integer)model.getAttribute("login"));
+			System.out.println("islogin number : "+model.getAttribute("isLogin"));
+		}
 		
+		
+	
 		return "/basic/layout";
 	}
 	
@@ -61,16 +82,13 @@ public class BoardController {
 	@PostMapping("/add")
 	public String boardAdd(@RequestParam Map<String, String> data, HttpSession session) {
 		
-		System.out.println("session : "+session.getAttribute("id"));
-		
-		int userId = (Integer)session.getAttribute("id");
-
-		if(userId == 0) {
+		if(session.getAttribute("id") == null) {
 			return "redirect:/";
 		}
 		
-		boardService.add(new Board(userId, data.get("content"), data.get("title")));
+		int userId = (Integer)session.getAttribute("id");
 		
+		boardService.add(new Board(userId, data.get("title"), data.get("content")));
 		
 		return "redirect:/";
 		

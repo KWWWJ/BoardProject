@@ -1,11 +1,42 @@
 <!DOCTYPE html>
 <html lang="ko" mxlns:th="http://www.thymeleaf.org">
-    <head th:fragment="headerFragmentHead">
-        <link rel="stylesheet" href="/styles/board/index.css">
-    </head>
-    <body>
-        <div th:fragment="headerFragment" id="header">
-            <h1 th:text="${title}"></h1>
+
+<head th:fragment="headerFragmentHead">
+    <link rel="stylesheet" href="/styles/board/index.css">
+</head>
+
+<body>
+    <div th:fragment="headerFragment" id="header">
+        <h1 class="title" th:text="${title}"></h1>
+        <button onclick="location.href='/regist'" class="btn btn-outline-secondary regist-btn">회원 가입</button>
+        <button id="login-btn" onclick="location.href='/login'" class="btn btn-outline-success login-btn">로그인</button>
+    </div>
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">로그인 실패</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <p>아이디 혹은 비밀번호가 잘못 입력되었습니다.</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>
         </div>
-    </body>
+    </div>
+    <script>
+        const myModal = document.getElementById('myModal')
+        const myInput = document.getElementById('myInput')
+
+        myModal.addEventListener('shown.bs.modal', function () {
+            myInput.focus()
+        })
+
+
+    </script>
+</body>
+
 </html>

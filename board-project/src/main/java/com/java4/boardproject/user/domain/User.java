@@ -27,8 +27,8 @@ public class User {
 	@NonNull
 	private String email;
 	private String gitAddress;
-	private boolean gender;
-	private Date birth;
+	private int gender;
+	private Date birth=null;
 	private Timestamp createdAt;
 	
 	public User(String userId,
@@ -38,7 +38,7 @@ public class User {
 			String address,
 			String email,
 			String gitAddress,
-			boolean gender,
+			int gender,
 			Date birth) {
 		this.userId = userId;
 		this.password = password;

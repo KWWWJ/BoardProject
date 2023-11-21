@@ -11,17 +11,18 @@
       crossorigin="anonymous"></script>
    <link rel="stylesheet" href="/styles/board/index.css">
 
-   <head th:repalce="~{basic/header :: headerFragmentHead}"></head>
+   <head th:repalce="~{${headLink} :: ${headerHead}}"></head>
 
-   <head th:repalce="~{${path} :: ${contentHead}}"></head>
+   <head th:if="${path != null}" th:repalce="~{${path} :: ${contentHead}}"></head>
 </head>
 
 <body>
    <div id="root">
-      <div id="header" th:replace="~{/basic/header :: headerFragment}"></div>
+      <div id="header" th:insert="~{${headLink} :: ${header}}"></div>
       <div id="menu"></div>
-      <div id="content" th:insert="~{${path} :: ${content}}"></div>
+      <div id="content" th:if="${path != null}" th:insert="~{${path} :: ${content}}"></div>
    </div>
+
 </body>
 
 </html>

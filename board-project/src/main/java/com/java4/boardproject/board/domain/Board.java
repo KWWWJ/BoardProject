@@ -3,6 +3,9 @@ package com.java4.boardproject.board.domain;
 
 import java.sql.Timestamp;
 
+import com.java4.boardproject.category.domain.Category;
+import com.java4.boardproject.user.domain.User;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NonNull;
