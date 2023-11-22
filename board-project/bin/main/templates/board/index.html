@@ -20,24 +20,12 @@
         </tr>
       </thead>
       <tbody>
-        <tr th:each="item:${list}" th:object="${item}">
+        <tr th:each="item : ${list}" th:object="${item}">
           <th scope="row" th:text="*{id}"></th>
           <td th:text="*{title}"></td>
           <td th:text="*{userId}"></td>
           <td th:text="*{createdAt}"></td>
         </tr>
-        <!-- <tr>
-                <th scope="row">2</th>
-                <td>Jacob</td>
-                <td>Thornton</td>
-                <td>@fat</td>
-              </tr>
-              <tr>
-                <th scope="row">3</th>
-                <td colspan="2">Larry the Bird</td>
-                <td>@twitter</td>
-              </tr>
-            </tbody> -->
     </table>
   </div>
   <div id="isLogin" th:text="${isLogin}"></div>

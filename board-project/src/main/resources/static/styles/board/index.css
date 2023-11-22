@@ -41,6 +41,10 @@
     float: left;
 }
 
+.home-btn {
+    float: left;
+}
+
 .user-name-box {
     display: flex;
     float: inline-end;

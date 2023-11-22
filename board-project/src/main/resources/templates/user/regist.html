@@ -85,7 +85,7 @@
                 <div class="input-group mb-4">
                     <span class="input-group-text" id="user-gitAddress" aria-placeholder="gitAddress"
                         aria-label="gitAddress" aria-describedby="gitAddress">Git Address</span>
-                    <input type="text" name="gitAddress" class="form-control" value="https://github.com/">
+                    <input type="text" name="gitAddress" class="form-control">
 
 
                 </div>
@@ -105,73 +105,10 @@
                 </div>
                 <div>
                     <button id="regist-btn" class="btn btn-outline-success">가입하기</button>
-                    <button id="cancel" class="btn btn-outline-danger">뒤로가기</button>
+                    <script src="/script/user/regist.js"></script>
                 </div>
             </fieldset>
         </form>
-        <script>
-            const pattern1 = /[0-9]/;
-            const pattern2 = /[a-z]/;
-            const pattern3 = /[A-Z]/;
-            const pattern4 = /[~!@#$%^&*]/;
-            const pwMessage = "";
-
-            function handleOnInput(e) {
-                e.value = e.value.replace(/[^0-9a-zA-Z]/ig, '');
-            }
-
-            function phone(e) {
-                e.value = e.value
-                    .replace(/[^0-9]/g, '')
-                    .replace(/(^02.{0}|^01.{1}|[0-9]{3,4})([0-9]{3,4})([0-9]{4})/g, "$1-$2-$3");
-                console.log("work2");
-            }
-
-            function passwordCheck(e) {
-                console.log("input : " + e.value.length + "|" + e.value);
-
-                if (pattern1.test(e.value) && pattern2.test(e.value) && pattern3.test(e.value) && pattern4.test(e.value) && e.value.length >= 10 && e.value.length <= 30) {
-                    document.getElementById("password").innerHTML = "조건을 만족했습니다."
-                    document.getElementById("password").style.color = "green"
-                    console.log("success : " + "|" + pattern1.test(e.value) + "|" + pattern2.test(e.value) + "|" + pattern3.test(e.value) + "|" + pattern4.test(e.value));
-                } else {
-                    document.getElementById("password").style.display = "block";
-                    console.log("resean : " + "|" + pattern1.test(e.value) + "|" + pattern2.test(e.value) + "|" + pattern3.test(e.value) + "|" + pattern4.test(e.value));
-                    document.getElementById("regist-btn").addEventListener("submit", (event) => {
-                        event.preventDefault();
-                        alert("정보를 올바르게 작성해주세요.")
-                    })
-
-                }
-            }
-
-            // const regex = new RegExp('[a-z0-9]+@[a-z]+\.[com, org, ko.kr, net]]');
-
-            // function email(e) {
-            //     e.value = e.regex;
-            // }
-
-            // function gitAddress(e) {
-
-            //     if (e.startsWith('https://github.com/')) {
-            //         return e;
-            //     } else {
-            //         e = "https://github.com/" + e;
-            //     }
-            //     return e;
-            // }
-
-            // $('#datePicker').datepicker({
-            //     format: "yyyy-mm-dd",
-            //     // startDate: "-1d",
-            //     endDate: "1d",
-            //     autoclose: true,
-            //     clearBtn: true,
-            //     title: "Birth",
-            //     language: "ko",
-            // });
-
-        </script>
     </div>
 </body>
 

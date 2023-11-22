@@ -1,6 +1,8 @@
 CMD -> sqlpuls -> system/1234
 
-계정생성 : create user board by qwer;
+세션 변경 : alter session set "_ORACLE_SCRIPT"=true;  
+
+계정생성 : create user board identified by qwer;
 
 권한 부여 : grant coonct, resource, dba to board;
 

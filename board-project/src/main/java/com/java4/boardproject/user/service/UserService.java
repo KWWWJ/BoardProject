@@ -35,9 +35,9 @@ public class UserService {
 		}
 	}
 	
-//	public User get(String userId) {
-//		return userDAO.get(userId);
-//	}
+	public User get(int id) {
+		return userDAO.get(id);
+	}
 	
 	public List<User> getAll(){
 		return userDAO.getAll();

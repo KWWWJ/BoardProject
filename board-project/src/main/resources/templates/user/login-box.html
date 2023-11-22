@@ -8,7 +8,7 @@
 <body>
    <div th:fragment="loginBoxFragment" id="header">
       <h1 class="title" th:text="${title}"></h1>
-
+      <button onclick="location.href='/'" class="btn btn-outline-secondary home-btn">Home</button>
       <button onclick="location.href='/add'" class="btn btn-outline-primary write-btn">작성하기</button>
       <form id="logout-form" action="/logout" method="post">
          <button id="logout-btn" class="btn btn-outline-warning">로그아웃</button>

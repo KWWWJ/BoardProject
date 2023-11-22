@@ -34,11 +34,12 @@ public class UserController {
 		model.addAttribute("path", "/user/regist");
 		model.addAttribute("content", "registFragment");
 		model.addAttribute("contentHead", "registFragmentHead");
+		model.addAttribute("isLogin", 2);
 		return "/basic/layout";
 	}
 	
 	@GetMapping("/login")
-	public String loginPage(Model model) {
+	public String loginPage(Model model, HttpSession session) {
 		model.addAttribute("title", "로그인");
 		model.addAttribute("headLink", "basic/header");
 		model.addAttribute("headerHead", "headerFragment");
@@ -46,6 +47,7 @@ public class UserController {
 		model.addAttribute("path", "/user/login");
 		model.addAttribute("content", "loginFragment");
 		model.addAttribute("contentHead", "loginFragmentHead");
+		model.addAttribute("isLogin", 2);
 		return "/basic/layout";
 	}
 	
@@ -99,11 +101,11 @@ public class UserController {
 		if(user != null){
 			session.setAttribute("userName", user.getName());
 			session.setAttribute("id", user.getId());
-			model.addAttribute("login", 1);
+			session.setAttribute("login", 1);
 			System.out.println("로그인 성공");
 		}
 		else {
-			model.addAttribute("login", 0);
+			session.setAttribute("login", 0);
 			System.out.println("로그인 실패");
 		}
 		return "redirect:/";

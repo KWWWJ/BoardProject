@@ -1,6 +1,8 @@
 package com.java4.boardproject.board.controller;
 
 import java.sql.Timestamp;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.java4.boardproject.board.domain.Board;
 import com.java4.boardproject.board.service.BoardService;
+import com.java4.boardproject.user.domain.User;
 import com.java4.boardproject.user.service.UserService;
 
 import jakarta.servlet.http.HttpSession;
@@ -42,16 +45,24 @@ public class BoardController {
 		model.addAttribute("path", "/board/index");
 		model.addAttribute("content", "boardFragment");
 		model.addAttribute("contentHead", "boardFragmentHead");
-		model.addAttribute("list", boardService.getAll());
-		if(model.getAttribute("login") == null) {
-			model.addAttribute("isLogin", 2);
-			System.out.println(model.getAttribute("login"));
-		}else {
-			model.addAttribute("isLogin", (Integer)model.getAttribute("login"));
-			System.out.println("login number : "+(Integer)model.getAttribute("login"));
-			System.out.println("islogin number : "+model.getAttribute("isLogin"));
+		
+		List<Object> subList = new ArrayList<Object>();
+		for (int i = 0; i < boardService.getAll().size(); i++) {
+			subList.add(userService.get(boardService.getAll().get(i).getUserId()).getUserId());
 		}
 		
+//		List<Board> mainList = boardService.getAll();
+//		for(int i=0; i<boardService.getAll().size(); i++) {
+//			mainList.set(i, a);
+//		}
+		
+		model.addAttribute("list", boardService.getAll());
+		model.addAttribute("userId", subList);
+		if(session.getAttribute("login") == null) {
+			model.addAttribute("isLogin", 2);
+		}else {
+			model.addAttribute("isLogin", (Integer)session.getAttribute("login"));
+		}
 		
 	
 		return "/basic/layout";
@@ -59,6 +70,9 @@ public class BoardController {
 	
 	@GetMapping("/add")
 	public String boardAdd(Model model) {
+		model.addAttribute("headLink", "user/login-box");
+		model.addAttribute("headerHead", "loginBoxFragment");
+		model.addAttribute("headerHead", "loginBoxFragmentHead");
 		model.addAttribute("title", "작성하기");
 		model.addAttribute("path", "/board/add");
 		model.addAttribute("content", "addFragment");
@@ -71,6 +85,9 @@ public class BoardController {
 	
 	@GetMapping("/notice")
 	public String noticePage(Model model) {
+		model.addAttribute("headLink", "user/login-box");
+		model.addAttribute("headerHead", "loginBoxFragment");
+		model.addAttribute("headerHead", "loginBoxFragmentHead");
 		model.addAttribute("title", "공지사항");
 		model.addAttribute("path", "board/notice");
 		model.addAttribute("content", "noticeFragment");
