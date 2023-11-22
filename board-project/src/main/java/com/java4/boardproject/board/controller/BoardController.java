@@ -51,11 +51,6 @@ public class BoardController {
 			subList.add(userService.get(boardService.getAll().get(i).getUserId()).getUserId());
 		}
 		
-//		List<Board> mainList = boardService.getAll();
-//		for(int i=0; i<boardService.getAll().size(); i++) {
-//			mainList.set(i, a);
-//		}
-		
 		model.addAttribute("list", boardService.getAll());
 		model.addAttribute("userId", subList);
 		if(session.getAttribute("login") == null) {

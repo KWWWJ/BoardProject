@@ -20,11 +20,11 @@
         </tr>
       </thead>
       <tbody>
-        <tr th:each="item : ${list}" th:object="${item}">
+        <tr th:each="item, i : ${list}">
           <th scope="row" th:text="*{id}"></th>
-          <td th:text="*{title}"></td>
-          <td th:text="*{userId}"></td>
-          <td th:text="*{createdAt}"></td>
+          <td th:text="${item.title}"></td>
+          <td th:text="${userId[i.index]}"></td>
+          <td th:text="${item.createdAt}"></td>
         </tr>
     </table>
   </div>
