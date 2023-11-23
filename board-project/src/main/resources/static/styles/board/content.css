@@ -1,0 +1,9 @@
+@charset "UTF-8";
+
+.content-box {
+    position: absolute;
+    display: grid;
+    justify-content: space-around;
+    padding: 10px;
+    border: 1px solid gray;
+}

@@ -107,9 +107,28 @@
                     <button id="regist-btn" class="btn btn-outline-success">가입하기</button>
                     <script src="/script/user/regist.js"></script>
                 </div>
+
             </fieldset>
+            <div class="modal fade" id="regist-fail" tabindex="-1" aria-labelledby="exampleModalLabel"
+                aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h1 class="modal-title fs-5" id="exampleModalLabel">로그인 실패</h1>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div id="msg">
+
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </form>
     </div>
+
 </body>
 
 </html>

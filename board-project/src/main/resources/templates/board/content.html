@@ -1,13 +1,37 @@
 <html lang="ko" mxlns:th="http://www.thymeleaf.org">
 
 <head th:fragment="contentFragmentHead"></head>
+<link rel="stylesheet" href="/styles/board/content.css">
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>게시글</title>
 </head>
 
 <body>
-    <div th:fragment="contentFragment" class="board container">
+    <div th:fragment="contentFragment" class="content container">
+        <button id="edit-btn" class="btn btn-outline-success" onclick="location.href='/edit'">수정하기</button>
+        <form id="delete-btn" action="/delete" method="post">
+            <button class="btn btn-danger" onclick="location.href='/edit'">삭제하기</button>
+        </form>
+
+        <div class="content-box">
+            <h4 th:text="${contentBox.title}"></h4>
+            <h5 th:text="${contentBox.content}"></h5>
+        </div>
+        <script th:inline="javascript">
+            /*<![CDATA[*/
+            console.log("session id :" + [[${ checkId }]]);
+            console.log("page id : [[${ pageId }]]");
+            if ([[${ checkId }]] == [[${ pageId }]]) {
+                document.getElementById("edit-btn").style.display = "block"
+            }
+            if ([[${ checkId }]] == [[${ pageId }]]) {
+                document.getElementById("delete-form").style.display = "block"
+            }
+            /*]]>*/
+        </script>
+    </div>
+
 </body>
 
 </html>

@@ -1,0 +1,37 @@
+<html lang="ko">
+
+<head th:fragment="editFragmentHead">
+    <meta charset="UTF-8">
+    <title>게시글 수정</title>
+</head>
+
+<body>
+    <div th:fragment="editFragment" class="edit container">
+        <form id="edit-form" action="/edit" method="post">
+            <fieldset>
+                <div class="form-floating mb-3">
+                    <input th:value="${titleBox}" type="text" name="title" class="form-control" id="floatingInput"
+                        placeholder="제목">
+                </div>
+                <div class="form-floating">
+                    <input th:value="${contentBox}" type="text" name="content" class="form-control"
+                        id="floatingPassword" placeholder="내용">
+                    <div class="form-floating mb-3"></div>
+                </div>
+                <div>
+                    <button class="btn btn-primary">수정하기</button>
+                </div>
+            </fieldset>
+            <script>
+                document.getElementById("edit-form").onsubmit = (e) => {
+                    if (e.target.title.value == "" || e.target.content.value == "") {
+                        e.preventDefault();
+                        alert("내용을 비울 수 없습니다.");
+                    }
+                }
+            </script>
+        </form>
+    </div>
+</body>
+
+</html>

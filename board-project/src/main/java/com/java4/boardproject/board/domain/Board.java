@@ -15,6 +15,7 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 @AllArgsConstructor
 public class Board {
+	
 	private int id;
 	@NonNull
 	private int userId;
@@ -27,5 +28,7 @@ public class Board {
 //	private int hates = 0;
 	private boolean isWithdrew = false;
 	private Timestamp createdAt;
-	
+	private String userName;
+	private String usersUserId;
+
 }

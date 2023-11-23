@@ -52,7 +52,7 @@ public class UserController {
 	}
 	
 	@PostMapping("/regist")
-	public String registPage(@RequestParam Map<String, String> data, Model model) {
+	public String registPage(@RequestParam Map<String, String> data, Model model, HttpSession session) {
 		
 		int gender = 0;
 		
@@ -85,9 +85,11 @@ public class UserController {
 					data.get("gitAddress"),
 					gender,
 					date));
+			
 			return "redirect:/";
 		}catch(Exception e) {
 			e.printStackTrace();
+			
 			return "redirect:/regist";
 		}
 	}
@@ -115,6 +117,7 @@ public class UserController {
 	public String logout(@RequestParam Map<String, String> data, HttpSession session) {
 		session.setAttribute("userName", null);
 		session.setAttribute("id", null);
+		session.setAttribute("login", null);
 		return "redirect:/";
 	}
 

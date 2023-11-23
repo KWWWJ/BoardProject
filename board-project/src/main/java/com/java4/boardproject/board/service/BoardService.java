@@ -23,17 +23,26 @@ public class BoardService {
 		return board;
 	}
 	
-	public Board rewrite(int id, String title, String content, Timestamp createdAt) {
+	public Board rewrite(int id, String title, String content) {
 		Board board = boardDAO.get(id);
 		
 		board.setTitle(title);
 		board.setContent(content);
-		board.setCreatedAt(createdAt);
+		
+		boardDAO.update(board);
 		
 		return board;
 	}
 	
 	public List<Board> getAll(){
 		return boardDAO.getAll();
+	}
+	
+	public List<Board> getPage(int start){
+		return boardDAO.getAll(start);
+	}
+	
+	public void delete(int id) {
+		boardDAO.delete(id);
 	}
 }

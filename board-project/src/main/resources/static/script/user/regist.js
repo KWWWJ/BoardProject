@@ -1,4 +1,10 @@
+
+
+
 document.getElementById("regist-form").onsubmit = function (e) {
+    const registFail = new bootstrap.Modal(document.getElementById('regist-fail'));
+    const msgBox = document.getElementById("msg");
+    e.preventDefault();
 
     const idReg = /^[a-z0-9]{3,20}$/i;
     const pwReg = /^[a-z](?=.*[\!\@\#\$\%\^\&\*])(?=.*[0-9]).{10,30}$/i;
@@ -41,22 +47,22 @@ document.getElementById("regist-form").onsubmit = function (e) {
     }
 
     if (msg) {
-        console.log(msg);
-        alert(msg);
+        registFail.show();
+        msgBox.innerHTML = msg;
         e.preventDefault();
     } else {
         console.log("number : " + e.target.phoneNumber.value)
-
         e.target.phoneNumber.value = tempPhone;
         console.log(e.target.gitAddress.value);
-
     }
-
+    closeModalBtn.addEventListener('click', function () {
+        modal.style.display = "none";
+        document.body.style.overflow = "auto";
+    })
 
 
 
 };
-
 
 
 
