@@ -2,15 +2,16 @@
 <html lang="ko" mxlns:th="http://www.thymeleaf.org">
 
 <head th:fragment="headerFragmentHead">
-    <link rel="stylesheet" href="/styles/board/index.css">
+    <link rel="stylesheet" href="/styles/header.css">
 </head>
 
 <body>
     <div th:fragment="headerFragment" id="header">
-        <h1 class="title" th:text="${title}"></h1>
         <button onclick="location.href='/'" class="btn btn-outline-secondary home-btn">Home</button>
-        <button onclick="location.href='/regist'" class="btn btn-outline-secondary regist-btn">회원 가입</button>
+        <h1 class="title" th:text="${title}"></h1>
         <button id="login-btn" onclick="location.href='/login'" class="btn btn-outline-success login-btn">로그인</button>
+        <button onclick="location.href='/regist'" class="btn btn-outline-secondary regist-btn">회원 가입</button>
+
     </div>
     <div id="isLogin" th:text="${isLogin}"></div>
     <!-- Modal -->

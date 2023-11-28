@@ -30,5 +30,6 @@ public class Board {
 	private Timestamp createdAt;
 	private String userName;
 	private String usersUserId;
+	private String userGitAddress;
 
 }

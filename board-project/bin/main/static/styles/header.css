@@ -1,5 +1,29 @@
 @charset "UTF-8";
 
-#title h1 {
+#header {
+    display: flex;
     text-align: center;
+    margin-top: 30px;
+    margin-bottom: 30px;
+    justify-content: center;
+}
+
+#isLogin {
+    display: none;
+}
+
+.home-btn {
+    float: left;
+}
+
+.title {
+    margin: 0 180px 0 250px;
+}
+
+.regist-btn {
+    float: right;
+}
+
+.login-btn {
+    float: right;
 }

@@ -6,7 +6,7 @@
 </head>
 
 <body>
-    <div th:fragment="addFragment" class="add container">
+    <div th:fragment="addFragment">
         <form id="add-form" action="/add" method="post">
             <fieldset>
                 <div class="form-floating mb-3">
@@ -14,7 +14,8 @@
                     <label for="floatingInput">title</label>
                 </div>
                 <div class="form-floating">
-                    <input type="text" name="content" class="form-control" id="floatingPassword" placeholder="내용">
+                    <textarea type="text" name="content" class="teaxarea-size form-control" id="floatingPassword"
+                        placeholder="내용" onkeyup="autoResize(this)" onkeydown="autoResize(this)" rows="3"></textarea>
                     <label for="floatingPassword">content</label>
                     <div class="form-floating mb-3"></div>
                 </div>
@@ -23,12 +24,18 @@
                 </div>
             </fieldset>
             <script>
+                function autoResize(textarea) {
+                    textarea.style.height = 'auto';
+                    textarea.style.height = textarea.scrollHeight + 'px';
+                }
+
                 document.getElementById("add-form").onsubmit = (e) => {
                     if (e.target.title.value == "" || e.target.content.value == "") {
                         e.preventDefault();
                         alert("내용을 비울 수 없습니다.");
                     }
                 }
+
             </script>
         </form>
     </div>

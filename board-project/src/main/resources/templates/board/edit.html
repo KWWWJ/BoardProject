@@ -6,7 +6,7 @@
 </head>
 
 <body>
-    <div th:fragment="editFragment" class="edit container">
+    <div th:fragment="editFragment">
         <form id="edit-form" action="/edit" method="post">
             <fieldset>
                 <div class="form-floating mb-3">
@@ -14,8 +14,9 @@
                         placeholder="제목">
                 </div>
                 <div class="form-floating">
-                    <input th:value="${contentBox}" type="text" name="content" class="form-control"
-                        id="floatingPassword" placeholder="내용">
+                    <textarea type="text" th:text="${contentBox}" name="content" class="teaxarea-size form-control"
+                        id="floatingPassword" placeholder="내용" onkeyup="autoResize(this)" onkeydown="autoResize(this)"
+                        rows="3"></textarea>
                     <div class="form-floating mb-3"></div>
                 </div>
                 <div>
@@ -23,6 +24,11 @@
                 </div>
             </fieldset>
             <script>
+                function autoResize(textarea) {
+                    textarea.style.height = 'auto';
+                    textarea.style.height = textarea.scrollHeight + 'px';
+                }
+
                 document.getElementById("edit-form").onsubmit = (e) => {
                     if (e.target.title.value == "" || e.target.content.value == "") {
                         e.preventDefault();

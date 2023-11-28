@@ -2,6 +2,8 @@
 
 <head th:fragment="boardFragmentHead"></head>
 
+<head th:replace="~{/basic/userInfo :: userInfoFragmentHead}"></head>
+
 <head>
   <meta charset="UTF-8">
   <title>게시판</title>
@@ -14,7 +16,9 @@
     <!-- <th:block th:if="${session.userName != null}">
       <div th:replace="~{/board/add :: addFragment}"></div>
     </th:block> -->
-
+    <td>
+      <div th:replace="~{/basic/userInfo :: userInfoFragment}"></div>
+    </td>
     <table class="table">
       <thead>
         <tr>
@@ -25,32 +29,36 @@
           <th scope="col">작성일자</th>
         </tr>
       </thead>
-      <tbody>
-        <!-- <tr th:each="item, i : ${list}">
-          <th scope="row" th:text="*{id}"></th>
-          <td onclick="contentPageOn()" th:text="${item.title}"></td>
-          <td th:text="${userId[i.index]}"></td>
-          <td th:text="${item.createdAt}"></td>
-        </tr> -->
-        <tr th:each="item : ${list}" th:object="${item}">
-          <th scope="row" th:text="*{id}"></th>
-          <td class="hover-event" th:text="*{title}" th:onclick="contentPageOn([[*{id}]])"></td>
-          <td class="hover-event" th:text="*{userName}" th:onmouseover="showUser([[*{usersUserId}]])"></td>
-          <td th:text="*{usersUserId}"></td>
-          <td th:text="*{createdAt}"></td>
-        </tr>
+      <tr th:each="item : ${list}" th:object="${item}">
+        <th scope="row" th:text="*{id}"></th>
+        <td class="hover-event" th:text="*{title}" th:onclick="contentPageOn([[*{id}]])"></td>
+        <td class="user-name">
+          <div class="hover-event" th:text="*{userName}"></div>
+          <a class="user-git-address" th:if="*{userGitAddress} != null"
+            th:href="*{userGitAddress}">[[*{userGitAddress}]]</a>
+        </td>
+        <td th:text="*{usersUserId}"></td>
+        <td th:text="*{createdAt}"></td>
+      </tr>
     </table>
+
     <div class="page-bar">
-      <nav aria-label="Page navigation example">
+      <nav aria-label="Page navigation"
+        th:with="nowPage=${#numbers.formatInteger(param.page != null ? param.page : 1, 1)}">
         <ul class="pagination">
-          <li class="page-item">
-            <a class="page-link" href="?page=1" aria-label="Previous">
+          <li class="page-item" th:if="${nowPage} > 1">
+            <a class="page-link" th:href="@{/(page=${nowPage-1})}" aria-label="Previous">
               <span aria-hidden="true">&laquo;</span>
             </a>
           </li>
-          <div class="created-page"></div>
-          <li class="page-item">
-            <a class="page-link" href="?page=6" aria-label="Next">
+          <li th:each="page : ${#numbers.sequence(1, pageLength)}" class="page-item">
+            <a class="page-link" th:href="@{/(page=${page})}">
+              [[${page}]]
+            </a>
+          </li>
+          <!-- <div class="created-page"></div> -->
+          <li class="page-item" th:if="${nowPage} != ${pageLength}">
+            <a class="page-link" th:href="@{/(page=${nowPage}+1)}" aria-label="Next">
               <span aria-hidden="true">&raquo;</span>
             </a>
           </li>
@@ -58,21 +66,6 @@
         <script>
           function contentPageOn(id) {
             location.href = "/content?id=" + id;
-          }
-          function createPage(number) {
-            let page = '<li class="page-item"><a class="page-link" href="?page=' + number + '">' + number + '</a></li>';
-            const pageBox = document.createElement('li')
-            pageBox.innerHTML = page;
-            document.querySelector('.created-page').prepend(pageBox);
-          }
-
-          const list = [[${ pageLength }]];
-          for (let index = 0; index < list; index++) {
-            createPage(index + 1);
-          }
-
-          function showUser(userId) {
-            alert(userId);
           }
         </script>
       </nav>

@@ -1,7 +1,7 @@
 @charset "UTF-8";
 
-#regist-form {
-    width: 800px;
+#login-form {
+    max-width: 800px;
     margin-left: auto;
     margin-right: auto;
 }

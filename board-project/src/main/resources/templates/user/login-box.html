@@ -2,20 +2,20 @@
 <html lang="ko" mxlns:th="http://www.thymeleaf.org">
 
 <head th:fragment="loginBoxFragmentHead">
-   <link rel="stylesheet" href="/styles/board/index.css">
+   <link rel="stylesheet" href="/styles/login-box.css">
 </head>
 
 <body>
    <div th:fragment="loginBoxFragment" id="header">
-      <h1 class="title" th:text="${title}"></h1>
       <button onclick="location.href='/'" class="btn btn-outline-secondary home-btn">Home</button>
       <button onclick="location.href='/add'" class="btn btn-outline-primary write-btn">작성하기</button>
+      <h1 class="title" th:text="${title}"></h1>
+      <div class="user-name-box">
+         <div class="user-name" th:text="${userName}"></div>
+         <div>님 환영합니다.</div>
+      </div>
       <form id="logout-form" action="/logout" method="post">
          <button id="logout-btn" class="btn btn-outline-warning">로그아웃</button>
-         <div class="user-name-box">
-            <h5 class="user-name" th:text="${userName}"></h5>
-            <h5>님 환영합니다.</h5>
-         </div>
       </form>
    </div>
 </body>

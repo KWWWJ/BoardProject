@@ -1,0 +1,26 @@
+<html lang="ko" mxlns:th="http://www.thymeleaf.org">
+
+<head th:fragment="commentFragmentHead"></head>
+<title>게시글</title>
+</head>
+
+<body>
+    <div th:fragment="commentFragment">
+        <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+        <form action="/comments/add" method="post" th:if="${session.id} != null">
+            <input type="hidden" name="user_id" th:value="${session.id}">
+            <input type="hidden" name="board_id" th:value="*{id}">
+            <textarea type="text" name="comment-input" class="teaxarea-size form-control" id="floatingPassword"
+                placeholder="댓글을 작성해 주세요." onkeyup="autoResize(this)" onkeydown="autoResize(this)" rows="3"></textarea>
+            <div class="form-floating mb-3"></div>
+            <button class="btn btn-primary">댓글 등록</button>
+            <div class="form-floating mb-5"></div>
+        </form>
+        <hr />
+        <ul id="comment-list" th:data-board-id="*{id}"></ul>
+        <script src="/script/board/comment.js"></script>
+
+    </div>
+</body>
+
+</html>

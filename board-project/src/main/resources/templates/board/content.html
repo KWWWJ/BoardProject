@@ -1,35 +1,72 @@
 <html lang="ko" mxlns:th="http://www.thymeleaf.org">
 
 <head th:fragment="contentFragmentHead"></head>
-<link rel="stylesheet" href="/styles/board/content.css">
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>게시글</title>
 </head>
 
 <body>
-    <div th:fragment="contentFragment" class="content container">
-        <button id="edit-btn" class="btn btn-outline-success" onclick="location.href='/edit'">수정하기</button>
-        <form id="delete-btn" action="/delete" method="post">
-            <button class="btn btn-danger" onclick="location.href='/edit'">삭제하기</button>
-        </form>
+    <div th:fragment="contentFragment">
+        <link rel="stylesheet" href="/styles/board/content.css">
+        <div class="content-root">
+            <div class="content-box" th:object="${contentBox}">
+                <div class="content-header">
+                    <div class="category">category/category</div>
+                    <h4 th:text="*{title}"></h4>
+                    <div class="user-box">
+                        <div class="first-box">
+                            <div th:replace="~{/basic/userInfo :: userInfoFragment}"></div>
+                        </div>
+                        <div class="second-box">
+                            <div class="created-at" th:text="*{createdAt}"></div>&nbsp;
+                            <div>조회</div>&nbsp;
+                            <div class="views-count" th:text="*{views}"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="content-main">
+                    <h5 th:utext="*{content}"></h5>
+                </div>
+                <div class="comments">
+                    <div class="comment-header">
+                        <div>댓글</div>&nbsp;&nbsp;
+                        <div class="order-by">
+                            <div id="index">등록순</div>&nbsp;
+                            <div id="recently">최신순</div>&nbsp;
+                        </div>
+                    </div>
+                    <div class="comment-user-input">
+                        <div th:replace="~{/board/comment :: commentFragment}"></div>
+                    </div>
+                    <div class="comment-main">
 
-        <div class="content-box">
-            <h4 th:text="${contentBox.title}"></h4>
-            <h5 th:text="${contentBox.content}"></h5>
+                    </div>
+                    </tr>
+                </div>
+            </div>
+            <div class="btn-box">
+                <button id="edit-btn" class="btn btn-outline-success" onclick="location.href='/edit'">수정하기</button>
+                <form id="delete-form" action="/delete" method="post">
+                    <button class="btn btn-danger" onclick="location.href='/edit'">삭제하기</button>
+                </form>
+            </div>
         </div>
-        <script th:inline="javascript">
-            /*<![CDATA[*/
-            console.log("session id :" + [[${ checkId }]]);
-            console.log("page id : [[${ pageId }]]");
-            if ([[${ checkId }]] == [[${ pageId }]]) {
-                document.getElementById("edit-btn").style.display = "block"
-            }
-            if ([[${ checkId }]] == [[${ pageId }]]) {
-                document.getElementById("delete-form").style.display = "block"
-            }
-            /*]]>*/
-        </script>
+    </div>
+    <script th:inline="javascript">
+
+        /*<![CDATA[*/
+        if ([[${ checkId }]] == [[${ pageId }]]) {
+            document.getElementById("edit-btn").style.display = "inline-block"
+        }
+        if ([[${ checkId }]] == [[${ pageId }]]) {
+            document.getElementById("delete-form").style.display = "inline-block"
+        }
+
+
+        /*]]>*/
+
+
+    </script>
+
     </div>
 
 </body>

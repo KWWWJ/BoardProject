@@ -31,7 +31,8 @@ public class BoardDAO {
 					rs.getInt("is_withdrew") == 1,
 					rs.getTimestamp("created_at"),
 					rs.getString("user_name"),
-					rs.getString("user_nick")
+					rs.getString("user_nick"),
+					rs.getString("user_git_address")
 					);
 		}
 	};
@@ -47,18 +48,19 @@ public class BoardDAO {
 	
 	public Board get(int id) {
 		return jdbcTemplate.queryForObject(
-				"select a.*, b.\"name\" as \"user_name\", b.\"user_id\" as \"user_nick\" from boards a join users b on a.\"user_id\"=b.\"id\" where a.\"id\"=?", 
+				"select a.*, b.\"name\" as \"user_name\", b.\"user_id\" as \"user_nick\", b.\"git_address\" as \"user_git_address\" from boards a join users b on a.\"user_id\"=b.\"id\" where a.\"id\"=?", 
 				mapper, id
 			);
 	}
 	
+	
 	public List<Board> getAll(){
-		return jdbcTemplate.query("select a.*, b.\"name\" as \"user_name\", b.\"user_id\" as \"user_nick\" from boards a join users b on a.\"user_id\"=b.\"id\" order by a.\"id\"", mapper);
+		return jdbcTemplate.query("select a.*, b.\"name\" as \"user_name\", b.\"user_id\" as \"user_nick\", b.\"git_address\" as \"user_git_address\" from boards a join users b on a.\"user_id\"=b.\"id\" order by a.\"id\"", mapper);
 		
 	}
 	
 	public List<Board> getAll(int start){
-		String qureyStart = "select a.*, b.\"name\" as \"user_name\", b.\"user_id\" as \"user_nick\" from boards a join users b on a.\"user_id\"=b.\"id\" order by a.\"id\" offset "+String.valueOf(start)+" row fetch first 10 row only";
+		String qureyStart = "select a.*, b.\"name\" as \"user_name\", b.\"user_id\" as \"user_nick\", b.\"git_address\" as \"user_git_address\" from boards a join users b on a.\"user_id\"=b.\"id\" order by a.\"id\" desc offset "+String.valueOf(start)+" row fetch first 10 row only";
 		return jdbcTemplate.query(qureyStart, mapper);
 		
 	}
@@ -74,6 +76,10 @@ public class BoardDAO {
 	public void delete(int id) {
 		jdbcTemplate.update("delete from boards where \"id\"=?",
 				id);
+	}
+	
+	public int getCount() {
+		return jdbcTemplate.queryForObject("select count(*) from boards", Integer.class);
 	}
 	
 }

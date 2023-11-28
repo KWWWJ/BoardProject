@@ -1,0 +1,42 @@
+@charset "UTF-8";
+
+#header {
+    display: flex;
+    text-align: center;
+    margin-top: 30px;
+    margin-bottom: 30px;
+    justify-content: center;
+}
+
+.home-btn {
+    float: left;
+}
+
+.title {
+    margin: 0 100px 0 150px;
+}
+
+#logout-form {
+    display: contents;
+}
+
+#logout-btn {
+    float: right;
+}
+
+#isLogin {
+    visibility: hidden;
+}
+
+.write-btn {
+    float: left;
+}
+
+.user-name-box {
+    display: flex;
+    float: inline-end;
+    align-items: center;
+    font-size: 15px;
+    font-weight: 700;
+    margin-right: 10px;
+}

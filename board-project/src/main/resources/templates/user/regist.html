@@ -32,10 +32,11 @@
 </head>
 
 <body>
-    <div th:fragment="registFragment" class="regist container">
-        <div>*은 필수 기입사항</div>
+    <div th:fragment="registFragment">
+        <link rel="stylesheet" href="/styles/user/regist.css">
         <form id="regist-form" action="/regist" method="post">
             <fieldset>
+                <div>*은 필수 기입사항</div>
                 <div class="input-group mb-4">
                     <span class="input-group-text" id="user-name" aria-placeholder="Name" aria-label="name"
                         aria-describedby="name">NAME</span>

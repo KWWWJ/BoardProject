@@ -23,6 +23,10 @@ public class BoardService {
 		return board;
 	}
 	
+	public int getPageCount(int count) {
+		return (boardDAO.getCount()-1)/10+1;
+	}
+	
 	public Board rewrite(int id, String title, String content) {
 		Board board = boardDAO.get(id);
 		

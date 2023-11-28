@@ -1,13 +1,10 @@
-<html lang="ko">
+<html lang="ko" mxlns:th="http://www.thymeleaf.org">
 
-<head th:fragment="loginFragmentHead">
-    <meta charset="UTF-8">
-    <link rel="stylesheet" href="/styles/user/login.css">
-    <title>로그인</title>
-</head>
+<head th:fragment="loginFragmentHead"></head>
 
 <body>
-    <div th:fragment="loginFragment" class="login container">
+    <div th:fragment="loginFragment">
+        <link rel="stylesheet" href="/styles/user/login.css">
         <form id="login-form" action="/login" method="post">
             <fieldset>
                 <div class="form-floating">

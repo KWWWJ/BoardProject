@@ -1,12 +1,11 @@
 package com.java4.boardproject.comment.domain;
 
-import java.sql.Date;
-
-import com.java4.boardproject.board.domain.Board;
-import com.java4.boardproject.user.domain.User;
+import java.sql.Timestamp;
+import java.util.List;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 
 @Data
@@ -14,9 +13,20 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class Comment {
 	private int id;
-	private int likes;
+	@NonNull
 	private String content;
-	private User writer;
-	private Board board;
-	private Date createdAt;
+	private Timestamp createdAt;
+	private boolean withdrew = false;
+	private final int userId;
+	private final int boardId;
+	private int commentId;
+	private List<Comment> children;
+	private String name;
+	
+	public Comment(String content, int userId, int boardId, int commentId) {
+		this.content = content;
+		this.userId = userId;
+		this.boardId = boardId;
+		this.commentId = commentId;
+	}
 }
