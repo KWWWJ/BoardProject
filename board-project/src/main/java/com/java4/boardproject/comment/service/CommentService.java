@@ -28,8 +28,8 @@ public class CommentService {
 //		return commentDAO.get(group);
 //	}
 	
-	public List<Comment> getComments(int boardId){
-		List<Comment> list =  commentDAO.getParents(boardId);
+	public List<Comment> getComments(int boardId, int start){
+		List<Comment> list =  commentDAO.getParents(boardId, start);
 		list.forEach((item)->{
 			item.setChildren(getChildren(boardId, item));
 		});
@@ -42,6 +42,10 @@ public class CommentService {
 			item.setChildren(getChildren(boardId, item));
 		});
 		return list;
+	}
+	
+	public int getCount(int boardId) {
+		return commentDAO.getCount(boardId);
 	}
 	
 	public List<Comment> getChildren(int boardId, int commentId){

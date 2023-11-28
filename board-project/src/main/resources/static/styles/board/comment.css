@@ -1,0 +1,46 @@
+@charset "UTF-8";
+
+#comment-list li {
+    list-style: none;
+}
+
+#comment-list form {
+    display: none;
+}
+
+#comment-list form.on {
+    display: block;
+}
+
+.comment-box {
+    margin-bottom: 10px;
+}
+
+.comment-user-name {
+    font-size: 13px;
+    font-weight: 600;
+}
+
+.comment-content {
+    font-size: 13px;
+    margin-top: 10px;
+}
+
+.comment-btn {
+    background: white;
+    border: none;
+    font-size: 13px;
+    color: #b2b2b2;
+}
+
+.create-box {
+    font-size: 13px;
+    color: #b2b2b2;
+    margin-top: 10px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #f2f1f1;
+}
+
+.recoment-box {
+    margin-top: 10px;
+}
