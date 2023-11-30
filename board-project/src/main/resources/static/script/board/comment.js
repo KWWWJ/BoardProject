@@ -6,13 +6,9 @@ const getList = async () => {
     const data = (await axios.get(`/comments?id=${commentListElem.dataset.boardId}&start=${commentListElem.children.length}`)).data;
     console.log(data);
 
-    window.addEventListener("scroll", function () {
-        if (this.window.scrollY({ bottom: 0 })) {
-            if (data.end == true) {
-                getList();
-            }
-        }
-    });
+    if (data.end) {
+        document.getElementById("add-comment-btn").outerHTML = "";
+    }
 
     setList(data.list, commentListElem);
 
@@ -95,9 +91,9 @@ function setList(list, parentElem) {
 
 getList();
 
-document.getElementById('add-comment-btn').onclick = () => {
+document.getElementById("add-comment-btn").onclick = () => {
     getList();
-}
+};
 
 // list.forEach(item => {
 //     const tempLiElem = document.createElement('li');

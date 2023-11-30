@@ -47,7 +47,7 @@
                     <span class="input-group-text" id="user-id" aria-placeholder="id" aria-label="id"
                         aria-describedby="id">ID</span>
                     <input type="text" name="userId" class="form-control" placeholder="*ID : 3~20자, 영어/숫자만 사용"
-                        minlength="3" maxlength="20" oninput="handleOnInput(this)">
+                        minlength="3" maxlength="20">
 
                 </div>
                 <div class="input-group mb-4">
@@ -55,15 +55,14 @@
                     <span class="input-group-text" id="user-Password" aria-placeholder="Password" aria-label="Password"
                         aria-describedby="Password">Password</span>
                     <input type="password" id="color" name="password" class="form-control"
-                        placeholder="*Password  : 10~30자, 대소문자/숫자/특수문자 포함" minlength="10" maxlength="30"
-                        oninput="passwordCheck(this)">
+                        placeholder="*Password  : 10~30자, 대소문자/숫자/특수문자 포함" minlength="10" maxlength="30">
 
                 </div>
                 <div class="input-group mb-4">
                     <span class="input-group-text" id="user-phoneNumber" aria-placeholder="phoneNumber"
                         aria-label="phoneNumber" aria-describedby="phoneNumber">Phone Number</span>
                     <input type="text" name="phoneNumber" class="form-control" placeholder="*Phone Number"
-                        maxlength="13" oninput="phone(this)">
+                        maxlength="13">
 
 
                 </div>
@@ -106,9 +105,8 @@
                 </div>
                 <div>
                     <button id="regist-btn" class="btn btn-outline-success">가입하기</button>
-                    <script src="/script/user/regist.js"></script>
-                </div>
 
+                </div>
             </fieldset>
             <div class="modal fade" id="regist-fail" tabindex="-1" aria-labelledby="exampleModalLabel"
                 aria-hidden="true">
@@ -122,11 +120,13 @@
 
                         </div>
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                            <button type="button" id="close-btn" class="btn btn-secondary"
+                                data-bs-dismiss="modal">Close</button>
                         </div>
                     </div>
                 </div>
             </div>
+            <script src="/script/user/regist.js"></script>
         </form>
     </div>
 

@@ -1,10 +1,9 @@
-
+const closeModalBtn = document.getElementById('close-btn');
 
 
 document.getElementById("regist-form").onsubmit = function (e) {
     const registFail = new bootstrap.Modal(document.getElementById('regist-fail'));
     const msgBox = document.getElementById("msg");
-    e.preventDefault();
 
     const idReg = /^[a-z0-9]{3,20}$/i;
     const pwReg = /^[a-z](?=.*[\!\@\#\$\%\^\&\*])(?=.*[0-9]).{10,30}$/i;

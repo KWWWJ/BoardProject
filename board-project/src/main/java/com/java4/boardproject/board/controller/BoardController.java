@@ -1,16 +1,22 @@
 package com.java4.boardproject.board.controller;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.java4.boardproject.board.domain.Board;
 import com.java4.boardproject.board.service.BoardService;
@@ -83,6 +89,8 @@ public class BoardController {
 		model.addAttribute("content", "addFragment");
 		model.addAttribute("contentHead", "addFragmentHead");
 		
+		
+		
 		return "/basic/layout";
 	}
 	
@@ -142,31 +150,6 @@ public class BoardController {
 		model.addAttribute("pageId", boardService.get(id).getUserId());
 		model.addAttribute("isLogin", 2);
 		
-//		if(Integer.parseInt((String)session.getAttribute("id")) != boardService.get(id).getUserId()) {
-//			
-//		}
-		
-//		List<Comment> main = new ArrayList<>();
-//		List<Comment> sub = new ArrayList<>();
-//		for (int i = 0; i < commentService.getBoardAll(id).size(); i++) {
-//			for (int j = 0; j < commentService.getGroupAll(i+1).size(); j++) {
-//				System.out.println(commentService.getGroupAll(i+1).get(j).getIndex());
-//				if(commentService.getGroupAll(i+1).get(j).getIndex() == 1) {
-//					main.add(commentService.getGroupAll(i+1).get(0));
-////					System.out.println("main input");
-//				}
-//				else {
-//					sub.add(commentService.getGroupAll(i+1).get(j));
-////					System.out.println("sub input");
-//				}
-//			}
-//		}
-//
-//		System.out.println("main : "+main);
-//		System.out.println("sub : "+sub);
-//		model.addAttribute("comment-main", main);
-//		model.addAttribute("comment-sub", sub);
-		
 		session.setAttribute("nowPageId", id);
 		return "/basic/layout";
 	}
@@ -216,10 +199,13 @@ public class BoardController {
 		if(session.getAttribute("id") == null) {
 			return "redirect:/";
 		}
+		String tempContent = data.get("content");
+		tempContent.replaceAll("width=\"[0-9]*\"", "width=\"100%\"");
+		tempContent.replaceAll("height=\"[0-9]*\"", "height=\"auto\"");
 		
 		int userId = (Integer)session.getAttribute("id");
 		
-		boardService.add(new Board(userId, data.get("title"), data.get("content")));
+		boardService.add(new Board(userId, data.get("title"), tempContent));
 		
 		return "redirect:/";
 		
@@ -238,6 +224,32 @@ public class BoardController {
 		boardService.delete((Integer)session.getAttribute("nowPageId"));
 		
 		return "redirect:/";
+	}
+	
+	@PostMapping("/uploads/image")
+	@ResponseBody
+	public ModelMap uploadImage(MultipartHttpServletRequest req) {
+		ModelMap model = new ModelMap();
+		try {
+			MultipartFile uploadFile = req.getFile("upload");
+			System.out.println(uploadFile.getOriginalFilename());
+			String originName = uploadFile.getOriginalFilename();
+			String[] tempNames = originName.split("[.]");
+			String ext = tempNames[tempNames.length - 1];
+			String randomName = UUID.randomUUID() + "." + ext;
+			System.out.println("바뀐 이름 : "+randomName);
+			String savePath = "C:\\Users\\oooon\\git\\board-project\\src\\main\\resources\\static\\images\\"+randomName;
+			String uploadUrl = "images/" + randomName;
+			File file = new File(savePath);
+			uploadFile.transferTo(file);
+			
+			model.addAttribute("uploaded", true);
+			model.addAttribute("url", uploadUrl);
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		
+		return model;
 	}
 
 }

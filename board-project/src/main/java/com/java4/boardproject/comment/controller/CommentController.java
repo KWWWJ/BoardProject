@@ -31,14 +31,8 @@ public class CommentController {
 				 commentService.getComments(
 						 Integer.parseInt(data.get("id")),
 						 Integer.parseInt(data.get("start"))
-						 ), commentService.getCount(Integer.parseInt(data.get("id "))) <= Integer.parseInt(data.get("start"))+5);
+						 ), commentService.getCount(Integer.parseInt(data.get("id"))) <= Integer.parseInt(data.get("start"))+5);
 		return res;
-	}
-	
-	@GetMapping("th")
-	public String getComment(@RequestParam Map<String, String> data, Model model) {
-		
-		return "comment/list";
 	}
 	
 	

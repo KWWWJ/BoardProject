@@ -53,7 +53,7 @@ public class UserController {
 	
 	@PostMapping("/regist")
 	public String registPage(@RequestParam Map<String, String> data, Model model, HttpSession session) {
-		
+		System.out.println("1");
 		int gender = 0;
 		
 		try {

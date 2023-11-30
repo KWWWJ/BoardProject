@@ -16,18 +16,14 @@
                 <div class="form-floating">
                     <textarea type="text" name="content" class="teaxarea-size form-control" id="floatingPassword"
                         placeholder="내용" onkeyup="autoResize(this)" onkeydown="autoResize(this)" rows="3"></textarea>
-                    <label for="floatingPassword">content</label>
                     <div class="form-floating mb-3"></div>
                 </div>
                 <div>
                     <button class="btn btn-primary">업로드</button>
                 </div>
             </fieldset>
+
             <script>
-                function autoResize(textarea) {
-                    textarea.style.height = 'auto';
-                    textarea.style.height = textarea.scrollHeight + 'px';
-                }
 
                 document.getElementById("add-form").onsubmit = (e) => {
                     if (e.target.title.value == "" || e.target.content.value == "") {
@@ -38,6 +34,14 @@
 
             </script>
         </form>
+        <script src="https://cdn.ckeditor.com/ckeditor5/40.1.0/classic/ckeditor.js"></script>
+        <script src="https://cdn.ckeditor.com/ckeditor5/40.1.0/classic/translations/ko.js"></script>
+        <script>
+            ClassicEditor.create(document.getElementById("floatingPassword"), {
+                language: "ko",
+                ckfinder: { uploadUrl: "/uploads/image" },
+            });
+        </script>
     </div>
 </body>
 

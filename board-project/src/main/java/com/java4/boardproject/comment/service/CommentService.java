@@ -5,16 +5,18 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.java4.boardproject.board.dao.BoardDAO;
-import com.java4.boardproject.comment.dao.CommentDAO;
+//import com.java4.boardproject.board.dao.BoardDAO;
+import com.java4.boardproject.board.dao.BoardDAOMysql;
+//import com.java4.boardproject.comment.dao.CommentDAO;
+import com.java4.boardproject.comment.dao.commentDAOMysql;
 import com.java4.boardproject.comment.domain.Comment;
 
 @Service
 public class CommentService {
 	@Autowired
-	CommentDAO commentDAO;
+	commentDAOMysql commentDAO;
 	@Autowired
-	BoardDAO boardDAO;
+	BoardDAOMysql boardDAO;
 	
 	public void add(Comment comment) {
 		commentDAO.add(comment);

@@ -7,12 +7,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.java4.boardproject.user.dao.UserDAO;
+import com.java4.boardproject.user.dao.UserDAOMysql;
 import com.java4.boardproject.user.domain.User;
 
 @Service
 public class UserService {
 	@Autowired
-	UserDAO userDAO;
+	UserDAOMysql userDAO;
 	
 	public void add(User user) {
 		user.setPassword(cryptoPassword(user.getPassword()));
